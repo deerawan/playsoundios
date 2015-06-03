@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
+    
+    var audioPlayer:AVAudioPlayer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,5 +24,20 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func playSound(sender: UIButton) {
+        
+        var audioFilePath = NSBundle.mainBundle().pathForResource("music", ofType: "mp3")
+        
+        if audioFilePath != nil {
+        
+            var audioFileUrl = NSURL.fileURLWithPath(audioFilePath!)
+        
+            audioPlayer = AVAudioPlayer(contentsOfURL: audioFileUrl, error: nil)
+            audioPlayer.play()
+
+        } else {
+            println("audio file is not found")
+        }
+    }
 }
 
